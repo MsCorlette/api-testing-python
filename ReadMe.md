@@ -1,0 +1,29 @@
+# Api Testing Project - Python & Postman
+
+## This project demonstrates API testing using Python and Postman against the reqres.in demo API. It covers both manual 
+   verification in Postman and automated test cases in Python, testing positive and negative scenarios including 
+   authentication and user validation.r
+
+   
+## Tech Stack
+ - Python 3.14
+ - Request library
+ - Postman (manual verification)
+
+## Test Scenarios
+
+| Test | Description | Expected results | 
+| Valid user | Get existing user | 200 OK |
+| Invalid user | Get non-existing user | 404 Not Found |
+| No Authentication | Get without API key | 200 (mock API) | 
+| Invalid token | Get with fake API key | 200 (mock API) |
+
+## How to Run
+1. Clone this repository
+2. Install dependencies:
+pip install -r requirements.txt
+3. Run tests:
+python test_users.py
+
+Demo API
+https://reqres.in 
