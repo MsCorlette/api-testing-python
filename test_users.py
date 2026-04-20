@@ -35,6 +35,108 @@ def test_invalid_token():
     assert response.status_code == 200
     print("Negative test 3 passed! Invalid token returns 200 (mock API behaviour")
 
+def test_create_user():
+    """Test that a new user can be created"""
+    new_user = {
+        "name": "Corlette",
+        "job": "QA Analyst"
+    }
+    response = requests.post(
+        "https://reqres.in/api/users",
+        json=new_user,
+        headers=headers
+    )
+    assert response.status_code == 201
+    assert "id" in response.json()
+    assert "createdAt" in response.json()
+    print("Positive test passed! New user created with id:", response.json().get("id"))
+
+def test_update_user():
+    """Test that an existing user can be updated"""
+
+    updated_user = {
+        "name": "Corlette Updated",
+        "job": "Senior QA Analyst"
+
+    }
+
+    response = requests.put(
+        url="https://reqres.in/api/users/2",
+        json=updated_user,
+        headers=headers
+    )
+
+    assert response.status_code == 200
+
+    data = response.json()
+
+    assert data["name"] == "Corlette Updated"
+    assert data["job"] == "Senior QA Analyst"
+    assert "updatedAt" in data
+    print("PUT test passed! User successfully updated.")
+
+def test_patch_user():
+    """Test that a user can be partially updated"""
+
+    patch_data = {
+        "job": "Lead QA Analyst"
+    }
+
+    response = requests.patch(
+        url="https://reqres.in/api/users/2",
+        json=patch_data,
+        headers=headers
+    )
+
+    assert response.status_code == 200
+
+    data = response.json()
+
+    assert data["job"] == "Lead QA Analyst"
+    assert "updatedAt" in data
+    print("PATCH test passed! User partially updated.")
+
+# Negative Patch test case
+def test_patch_user_invalid():
+    """Test PATCH on non-existent user"""
+
+    response = requests.patch(
+        url="https://reqres.in/api/users/999",
+        json={"job": "Test"},
+        headers=headers
+    )
+
+    # Api behaviour may vary
+    assert response.status_code in [200, 404]
+
+def test_delete_user():
+    """Test that a user can be deleted"""
+
+    response = requests.delete(
+        url="https://reqres.in/api/users/2",
+        headers=headers
+    )
+
+    assert response.status_code == 204
+    assert response.text == ""
+    print("DELETE test passed! User successfully deleted.")
+
+# Negative delete test case
+def test_delete_user_invalid():
+    """Test deleting a non-existing user"""
+
+    response = requests.delete(
+        url="https://reqres.in/api/users/999",
+        headers=headers
+    )
+
+    # API behaviour may vary
+    assert response.status_code in [204, 404]
+
+
+
+
+
 
 
 
