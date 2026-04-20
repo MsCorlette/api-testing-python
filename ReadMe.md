@@ -17,6 +17,13 @@
 | Invalid user | Get non-existing user | 404 Not Found |
 | No Authentication | Get without API key | 200 (mock API) |
 | Invalid token | Get with fake API key | 200 (mock API) |
+| Create user | POST new user | 201 Created |
+| Update user | PUT full user update | 200 OK |
+| Patch user | PATCH partial update | 200 OK | 
+| Patch invalid user | PATCH non-existing user | 200 or 404 | 
+| Delete user | DELETE existing user | 204 No Content| 
+| Delete invalid user | DELETE non-existing user | 204 or 404 | 
+
 
 ## How to Run
 1. Clone this repository
