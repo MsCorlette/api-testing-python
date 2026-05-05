@@ -133,6 +133,35 @@ def test_delete_user_invalid():
     # API behaviour may vary
     assert response.status_code in [204, 404]
 
+def test_create_and_delete_user():
+    """Test creating a user then deleting that same user"""
+    new_user = {"name": "Corlette", "job": "QA Analyst"}
+
+    # Step 1 -  Create
+    create_response = requests.post(
+        url="https://reqres.in/api/users",
+        json=new_user,
+        headers=headers
+    )
+    assert create_response.status_code == 201
+
+    # Step 2 - Extract ID
+    user_id = create_response.json()["id"]
+
+    # Step 3 Delete same user
+    delete_response = requests.delete(
+        url=f"https://reqres.in/api/users/{user_id}",
+        headers=headers
+    )
+    assert delete_response.status_code == 204
+    print(f"User {user_id} created and deleted successfully!")
+
+
+
+
+
+
+
 
 
 
