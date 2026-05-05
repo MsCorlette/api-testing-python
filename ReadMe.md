@@ -24,7 +24,17 @@
 | Delete user | DELETE existing user | 204 No Content| 
 | Delete invalid user | DELETE non-existing user | 204 or 404 | 
 
+## Important Note
 
+reqres.in is a mock/demo API used for practice purposed. It does not enforce strick authentication, meaning some requests with invalid or missing tokens may
+still return 200 OK instead of 401 Unauthorised.
+
+In a real-world application, the following would apply: 
+- Missing token - 401 Unauthorised
+- Invalid token - 401 or 403 Forbidden
+- Wrong Credentials - 401 Unauthorised
+
+This project demonstrates understanding of both mock API behaviour and real-world authentication expectations.
 ## How to Run
 1. Clone this repository
 2. Install dependencies:
